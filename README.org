@@ -83,82 +83,57 @@ GET http://localhost:4000/todos
 
 #+begin_example
 {
-  "todos": [
-    {
-      "_id": "64d8bc679ef9188452c25651",
-      "name": "create mongo app",
-      "description": "My description",
-      "status": true,
-      "createdAt": "2023-08-13T11:20:07.263Z",
-      "updatedAt": "2023-08-13T11:23:26.759Z",
-      "__v": 0
-    },
-    {
-      "_id": "64d8bf7d9ef9188452c25670",
-      "name": "fff",
-      "description": "as",
-      "status": true,
-      "createdAt": "2023-08-13T11:33:17.177Z",
-      "updatedAt": "2023-08-13T15:39:02.680Z",
-      "__v": 0
-    }
-  ]
+    "message": "Todo added",
+    "todos": [
+        {
+            "_id": "64d909d4c7e2fb853d952876",
+            "name": "Create app",
+            "description": "Create simple todo app",
+            "status": false,
+            "createdAt": "2023-08-13T16:50:28.242Z",
+            "updatedAt": "2023-08-13T16:50:28.242Z",
+            "__v": 0
+        },
+    ]
 }
-
 #+end_example
+
 
 *** POST =/add-todo=
 
 Add a new todo (Fields: =name=, =description=, =status=)
 
-Example:
+*Example*:
 
-#+begin_src restclient
+#+begin_src restclient :wrap example
 POST http://localhost:4000/add-todo
 Content-Type: application/json
-{"name": "My new todo", "description":"My description", "status": false}
+{"name": "Task 2", "description": "My task 2", "status": false}
 #+end_src
 
 *Response*:
 
+
 #+begin_example
 {
   "message": "Todo added",
-  "todo": {
-    "name": "My new todo",
-    "description": "My description",
-    "status": false,
-    "_id": "64d8ff85225669fd83745de1",
-    "createdAt": "2023-08-13T16:06:29.675Z",
-    "updatedAt": "2023-08-13T16:06:29.675Z",
-    "__v": 0
-  },
   "todos": [
     {
-      "_id": "64d8bc679ef9188452c25651",
-      "name": "create mongo app",
-      "description": "My description",
-      "status": true,
-      "createdAt": "2023-08-13T11:20:07.263Z",
-      "updatedAt": "2023-08-13T11:23:26.759Z",
-      "__v": 0
-    },
-    {
-      "_id": "64d8bf7d9ef9188452c25670",
-      "name": "fff",
-      "description": "as",
-      "status": true,
-      "createdAt": "2023-08-13T11:33:17.177Z",
-      "updatedAt": "2023-08-13T15:39:02.680Z",
-      "__v": 0
-    },
-    {
-      "_id": "64d8ff85225669fd83745de1",
-      "name": "My new todo",
-      "description": "My description",
+      "_id": "64d909d4c7e2fb853d952876",
+      "name": "Create app",
+      "description": "Create simple todo app",
       "status": false,
-      "createdAt": "2023-08-13T16:06:29.675Z",
-      "updatedAt": "2023-08-13T16:06:29.675Z",
+      "createdAt": "2023-08-13T16:50:28.242Z",
+      "updatedAt": "2023-08-13T16:50:28.242Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d90a28c7e2fb853d952879",
+      "name": "Task 2",
+      "description": "My task 2",
+      "status": false,
+      "createdAt": "2023-08-13T16:51:52.543Z",
+      "updatedAt": "2023-08-13T16:51:52.543Z",
       "__v": 0
     }
   ]
@@ -166,123 +141,69 @@ Content-Type: application/json
 #+end_example
 
 
+
 *** PUT =/edit-todo/:id=
 
-Example:
+*Example*:
 
 #+begin_src restclient 
-PUT http://localhost:4000/edit-todo/64d8ff85225669fd83745de1
+PUT http://localhost:4000/edit-todo/64d909d4c7e2fb853d952876
 Content-Type: application/json
-{"name": "My new todo name", "description":"My description", "status": true}
+
+{"name": "Create app", "description": "Create simple todo app", "status": true}
 #+end_src
 
 *Response*:
-
 #+begin_example
 {
   "message": "Todo updated",
-  "todo": {
-    "_id": "64d8ff85225669fd83745de1",
-    "name": "My new todo",
-    "description": "My description",
-    "status": false,
-    "createdAt": "2023-08-13T16:06:29.675Z",
-    "updatedAt": "2023-08-13T16:06:29.675Z",
-    "__v": 0
-  },
   "todos": [
     {
-      "_id": "64d8bc679ef9188452c25651",
-      "name": "create mongo app",
-      "description": "My description",
+      "_id": "64d909d4c7e2fb853d952876",
+      "name": "Create app",
+      "description": "Create simple todo app",
       "status": true,
-      "createdAt": "2023-08-13T11:20:07.263Z",
-      "updatedAt": "2023-08-13T11:23:26.759Z",
+      "createdAt": "2023-08-13T16:50:28.242Z",
+      "updatedAt": "2023-08-13T16:52:55.194Z",
       "__v": 0
     },
     {
-      "_id": "64d8bf7d9ef9188452c25670",
-      "name": "fff",
-      "description": "as",
-      "status": true,
-      "createdAt": "2023-08-13T11:33:17.177Z",
-      "updatedAt": "2023-08-13T15:39:02.680Z",
+      "_id": "64d90a28c7e2fb853d952879",
+      "name": "Task 2",
+      "description": "My task 2",
+      "status": false,
+      "createdAt": "2023-08-13T16:51:52.543Z",
+      "updatedAt": "2023-08-13T16:51:52.543Z",
       "__v": 0
-    },
-    {
-      "_id": "64d8ff85225669fd83745de1",
-      "name": "My new todo name",
-      "description": "My description",
-      "status": true,
-      "createdAt": "2023-08-13T16:06:29.675Z",
-      "updatedAt": "2023-08-13T16:11:12.119Z",
-      "__v": 0
-    },
+    }
   ]
 }
 
 #+end_example
 
-*Response*:
-
-#+BEGIN_EXAMPLE
-  {"_id": "19012da654ba49f714fd53dd",
-  "email": "0Enoch_OKeefe29@gmail.com",
-  "name": "Angela",
-  "lastname": "Newlastname",
-  "password": "xgNbId1I5D0OxO8"}
-#+END_EXAMPLE
-
 
 *** DELETE =/delete-todo/:id=
 
-Example:
+*Example*:
 
 #+begin_src restclient
-DELETE http://localhost:4000/delete-todo/64d8ff85225669fd83745de1
+DELETE http://localhost:4000/delete-todo/64d909d4c7e2fb853d952876
 #+end_src
 
 *Response*:
 #+begin_example
 {
   "message": "Todo deleted",
-  "todo": {
-    "_id": "64d8ff85225669fd83745de1",
-    "name": "My new todo name",
-    "description": "My description",
-    "status": true,
-    "createdAt": "2023-08-13T16:06:29.675Z",
-    "updatedAt": "2023-08-13T16:11:12.119Z",
-    "__v": 0
-  },
   "todos": [
     {
-      "_id": "64d8bc679ef9188452c25651",
-      "name": "create mongo app",
-      "description": "My description",
-      "status": true,
-      "createdAt": "2023-08-13T11:20:07.263Z",
-      "updatedAt": "2023-08-13T11:23:26.759Z",
-      "__v": 0
-    },
-    {
-      "_id": "64d8bf7d9ef9188452c25670",
-      "name": "fff",
-      "description": "as",
-      "status": true,
-      "createdAt": "2023-08-13T11:33:17.177Z",
-      "updatedAt": "2023-08-13T15:39:02.680Z",
-      "__v": 0
-    },
-    {
-      "_id": "64d8ff69225669fd83745dde",
-      "name": "My new todo",
-      "description": "My description",
+      "_id": "64d90a28c7e2fb853d952879",
+      "name": "Task 2",
+      "description": "My task 2",
       "status": false,
-      "createdAt": "2023-08-13T16:06:01.889Z",
-      "updatedAt": "2023-08-13T16:06:01.889Z",
+      "createdAt": "2023-08-13T16:51:52.543Z",
+      "updatedAt": "2023-08-13T16:51:52.543Z",
       "__v": 0
-    },
+    }
   ]
 }
 
