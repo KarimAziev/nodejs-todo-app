@@ -83,7 +83,6 @@ GET http://localhost:4000/todos
 
 #+begin_example
 {
-    "message": "Todo added",
     "todos": [
         {
             "_id": "64d909d4c7e2fb853d952876",
