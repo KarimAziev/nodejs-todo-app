@@ -15,10 +15,10 @@ It is provides services for beginners in the [[https://github.com/KarimAziev/rea
   - [[#environment][Environment]]
   - [[#running-the-application][Running the Application]]
   - [[#api][API]]
-    - [[#get-todos][GET /todos]]
-    - [[#post-add-todo][POST /add-todo]]
-    - [[#put-edit-todoid][PUT /edit-todo/:id]]
-    - [[#delete-delete-todoid][DELETE /delete-todo/:id]]
+    - [[#get-todos][GET =/todos=]]
+    - [[#post-add-todo][POST =/add-todo=]]
+    - [[#put-edit-todoid][PUT =/edit-todo/:id=]]
+    - [[#delete-delete-todoid][DELETE =/delete-todo/:id=]]
 #+END_QUOTE
 
 ** Installation
@@ -71,7 +71,7 @@ The server should now be running at =http://localhost:4000=.
 
 ** API
 
-*** GET /todos
+*** GET =/todos=
 
 Get all todos.
 
@@ -100,7 +100,7 @@ GET http://localhost:4000/todos
 #+end_example
 
 
-*** POST /add-todo
+*** POST =/add-todo=
 
 Add a new todo (Fields: =name=, =description=, =status=)
 
@@ -143,7 +143,7 @@ Content-Type: application/json
 
 
 
-*** PUT /edit-todo/:id
+*** PUT =/edit-todo/:id=
 
 Edit a todo (Fields: =name=, =description=, =status=)
 
@@ -185,7 +185,7 @@ Content-Type: application/json
 #+end_example
 
 
-*** DELETE /delete-todo/:id
+*** DELETE =/delete-todo/:id=
 
 Delete a todo.
 
