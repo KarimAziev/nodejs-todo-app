@@ -1,0 +1,8 @@
+{
+  "env": {
+    "MONGO_USER": "my-username",
+    "MONGO_DB": "my-db-name",
+    "MONGO_PASSWORD": "my-password",
+    "MONGO_HOST": "my-host.mongodb.net"
+  }
+}

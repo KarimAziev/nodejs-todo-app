@@ -1,0 +1,289 @@
+#+AUTHOR: Karim Aziiev
+#+EMAIL: karim.aziiev@gmail.com
+#+OPTIONS: ^:nil tags:nil num:nil
+
+* About
+The simple application allows users to manage their todo lists. They can
+create, read, update, and delete todo items.
+
+* Todo-App                                                   :TOC_3_gh:QUOTE:
+#+BEGIN_QUOTE
+- [[#about][About]]
+  - [[#installation][Installation]]
+  - [[#environment][Environment]]
+  - [[#running-the-application][Running the Application]]
+  - [[#api][API]]
+    - [[#get-todos][GET =/todos=]]
+    - [[#post-add-todo][POST =/add-todo=]]
+    - [[#put-edit-todoid][PUT =/edit-todo/:id=]]
+    - [[#delete-delete-todoid][DELETE =/delete-todo/:id=]]
+#+END_QUOTE
+
+** Installation
+
+First, clone the repository:
+
+#+BEGIN_EXAMPLE
+  git clone https://github.com/KarimAziev/nodejs-todo-app.git
+#+END_EXAMPLE
+
+Then, navigate into the directory:
+
+#+BEGIN_EXAMPLE
+  cd nodejs-todo-app
+#+END_EXAMPLE
+
+** Environment
+
+Create the file =nodemon.json= file:
+
+#+BEGIN_EXAMPLE
+cp ./nodemon.example.json ./nodemon.json
+#+END_EXAMPLE
+
+Edit this file with your actual environment variables based on the connection uri:
+
+#+begin_src typescript
+  const uri: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
+#+end_src
+
+- =PORT=: The port the server will listen on. Default is 4000.
+- =MONGO_USER=: Your MongoDB username.
+- =MONGO_PASSWORD=: Your MongoDB password.
+- =MONGO_DB=: Your MongoDB database name.
+- =MONGO_HOST=: Your MongoDB host.
+
+
+
+** Running the Application
+
+After setting up the environment variables run:
+
+#+BEGIN_EXAMPLE
+npm install && npm start
+#+END_EXAMPLE
+
+The server should now be running at =http://localhost:4000=.
+
+
+
+** API
+
+*** GET =/todos=
+
+Get all todos.
+
+*Example*:
+
+#+BEGIN_SRC restclient
+GET http://localhost:4000/todos
+#+END_SRC
+
+*Response*:
+
+#+begin_example
+{
+  "todos": [
+    {
+      "_id": "64d8bc679ef9188452c25651",
+      "name": "create mongo app",
+      "description": "My description",
+      "status": true,
+      "createdAt": "2023-08-13T11:20:07.263Z",
+      "updatedAt": "2023-08-13T11:23:26.759Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d8bf7d9ef9188452c25670",
+      "name": "fff",
+      "description": "as",
+      "status": true,
+      "createdAt": "2023-08-13T11:33:17.177Z",
+      "updatedAt": "2023-08-13T15:39:02.680Z",
+      "__v": 0
+    }
+  ]
+}
+
+#+end_example
+
+*** POST =/add-todo=
+
+Add a new todo (Fields: =name=, =description=, =status=)
+
+Example:
+
+#+begin_src restclient
+POST http://localhost:4000/add-todo
+Content-Type: application/json
+{"name": "My new todo", "description":"My description", "status": false}
+#+end_src
+
+*Response*:
+
+#+begin_example
+{
+  "message": "Todo added",
+  "todo": {
+    "name": "My new todo",
+    "description": "My description",
+    "status": false,
+    "_id": "64d8ff85225669fd83745de1",
+    "createdAt": "2023-08-13T16:06:29.675Z",
+    "updatedAt": "2023-08-13T16:06:29.675Z",
+    "__v": 0
+  },
+  "todos": [
+    {
+      "_id": "64d8bc679ef9188452c25651",
+      "name": "create mongo app",
+      "description": "My description",
+      "status": true,
+      "createdAt": "2023-08-13T11:20:07.263Z",
+      "updatedAt": "2023-08-13T11:23:26.759Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d8bf7d9ef9188452c25670",
+      "name": "fff",
+      "description": "as",
+      "status": true,
+      "createdAt": "2023-08-13T11:33:17.177Z",
+      "updatedAt": "2023-08-13T15:39:02.680Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d8ff85225669fd83745de1",
+      "name": "My new todo",
+      "description": "My description",
+      "status": false,
+      "createdAt": "2023-08-13T16:06:29.675Z",
+      "updatedAt": "2023-08-13T16:06:29.675Z",
+      "__v": 0
+    }
+  ]
+}
+#+end_example
+
+
+*** PUT =/edit-todo/:id=
+
+Example:
+
+#+begin_src restclient 
+PUT http://localhost:4000/edit-todo/64d8ff85225669fd83745de1
+Content-Type: application/json
+{"name": "My new todo name", "description":"My description", "status": true}
+#+end_src
+
+*Response*:
+
+#+begin_example
+{
+  "message": "Todo updated",
+  "todo": {
+    "_id": "64d8ff85225669fd83745de1",
+    "name": "My new todo",
+    "description": "My description",
+    "status": false,
+    "createdAt": "2023-08-13T16:06:29.675Z",
+    "updatedAt": "2023-08-13T16:06:29.675Z",
+    "__v": 0
+  },
+  "todos": [
+    {
+      "_id": "64d8bc679ef9188452c25651",
+      "name": "create mongo app",
+      "description": "My description",
+      "status": true,
+      "createdAt": "2023-08-13T11:20:07.263Z",
+      "updatedAt": "2023-08-13T11:23:26.759Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d8bf7d9ef9188452c25670",
+      "name": "fff",
+      "description": "as",
+      "status": true,
+      "createdAt": "2023-08-13T11:33:17.177Z",
+      "updatedAt": "2023-08-13T15:39:02.680Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d8ff85225669fd83745de1",
+      "name": "My new todo name",
+      "description": "My description",
+      "status": true,
+      "createdAt": "2023-08-13T16:06:29.675Z",
+      "updatedAt": "2023-08-13T16:11:12.119Z",
+      "__v": 0
+    },
+  ]
+}
+
+#+end_example
+
+*Response*:
+
+#+BEGIN_EXAMPLE
+  {"_id": "19012da654ba49f714fd53dd",
+  "email": "0Enoch_OKeefe29@gmail.com",
+  "name": "Angela",
+  "lastname": "Newlastname",
+  "password": "xgNbId1I5D0OxO8"}
+#+END_EXAMPLE
+
+
+*** DELETE =/delete-todo/:id=
+
+Example:
+
+#+begin_src restclient
+DELETE http://localhost:4000/delete-todo/64d8ff85225669fd83745de1
+#+end_src
+
+*Response*:
+#+begin_example
+{
+  "message": "Todo deleted",
+  "todo": {
+    "_id": "64d8ff85225669fd83745de1",
+    "name": "My new todo name",
+    "description": "My description",
+    "status": true,
+    "createdAt": "2023-08-13T16:06:29.675Z",
+    "updatedAt": "2023-08-13T16:11:12.119Z",
+    "__v": 0
+  },
+  "todos": [
+    {
+      "_id": "64d8bc679ef9188452c25651",
+      "name": "create mongo app",
+      "description": "My description",
+      "status": true,
+      "createdAt": "2023-08-13T11:20:07.263Z",
+      "updatedAt": "2023-08-13T11:23:26.759Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d8bf7d9ef9188452c25670",
+      "name": "fff",
+      "description": "as",
+      "status": true,
+      "createdAt": "2023-08-13T11:33:17.177Z",
+      "updatedAt": "2023-08-13T15:39:02.680Z",
+      "__v": 0
+    },
+    {
+      "_id": "64d8ff69225669fd83745dde",
+      "name": "My new todo",
+      "description": "My description",
+      "status": false,
+      "createdAt": "2023-08-13T16:06:01.889Z",
+      "updatedAt": "2023-08-13T16:06:01.889Z",
+      "__v": 0
+    },
+  ]
+}
+
+#+end_example
